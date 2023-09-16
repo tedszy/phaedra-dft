@@ -8,10 +8,6 @@ Intuitive exploration of the Discrete Fourier Transform using polygons and opera
 
 
 ## References
-<a id="1">[1]</a> 
-Dijkstra, E. W. (1968). 
-Go to statement considered harmful. 
-Communications of the ACM, 11(3), 147-148.
 
 <a id="1">[1]</a>
 Cooley, J. W., Lewis, P. A. W. and Welch, P. D.
