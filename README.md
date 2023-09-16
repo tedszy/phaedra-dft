@@ -1,5 +1,6 @@
 # phaedra-dft
-Intuitive exploration of the Discrete Fourier Transform using polygons and operators.
+Intuitive exploration of the Discrete Fourier Transform using polygons,
+operators and Asymptote graphics.
 
 
 [[1]](#1).
