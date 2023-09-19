@@ -42,7 +42,6 @@
        #'(lambda (w) (expt w k))
        (fundamental-primitive-polygon n)))
 
-
 (defun write-polygon-vertices (polygon filename)
   (with-open-file
       (out filename :direction :output :if-exists :supersede)
@@ -52,7 +51,6 @@
 	  do (format out "~a ~a ~a ~%"
 		     (realpart w) (imagpart w) vertex-label))))
 
-
 (defun try-it ()
-  (let ((poly (primitive-polygon 3 13)))
+  (let ((poly (primitive-polygon 12 44)))
     (write-polygon-vertices poly "polygon.dat")))    
