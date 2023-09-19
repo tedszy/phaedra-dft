@@ -7,7 +7,7 @@
  */
 
 import geometry;
-size(12cm);
+size(18cm);
 
 bool is_near(point P, point Q) {
   return abs(P-Q) < 1.0e-12;

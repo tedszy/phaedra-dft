@@ -29,18 +29,20 @@
 	      :adjustable t
 	      :element-type 'complex-vertex))
 
-;; the 1st primitive polygon of order n.
-(defun fundamental-primitive-polygon (n)
+;; The 1st Fourier polygon of order n.
+
+(defun first-fourier-polygon (n)
   (loop for j from 0 to (- n 1)
 	with fpp = (make-polygon n)
 	do (vector-push (root-of-unity j n) fpp)
 	finally (return  fpp)))
 
-;; (kth primitive polygon of order n.
-(defun primitive-polygon (k n)
+;; The kth Fourier polygon of order n.
+
+(defun fourier-polygon (k n)
   (map 'vector
        #'(lambda (w) (expt w k))
-       (fundamental-primitive-polygon n)))
+       (first-fourier-polygon n)))
 
 (defun write-polygon-vertices (polygon filename)
   (with-open-file
@@ -51,6 +53,12 @@
 	  do (format out "~a ~a ~a ~%"
 		     (realpart w) (imagpart w) vertex-label))))
 
-(defun try-it ()
-  (let ((poly (primitive-polygon 12 44)))
+
+
+
+
+
+
+(defun write-fourier-polygon (k n)
+  (let ((poly (fourier-polygon k n)))
     (write-polygon-vertices poly "polygon.dat")))    
