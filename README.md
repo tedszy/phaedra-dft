@@ -3,9 +3,7 @@ Intuitive exploration of the Discrete Fourier Transform using polygons,
 operators and Asymptote graphics.
 
 
-[[1]](#1).
-
-[[2]](#2).
+Cite [[1]](#1), [[2]](#2).
 
 
 ## References

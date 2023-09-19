@@ -1,4 +1,9 @@
 ;;;; package.lisp
 
 (defpackage #:phaedra-dft
-  (:use #:cl))
+  (:use #:cl)
+  (:export #:first-root-of-unity
+	   #:root-of-unity))
+
+
+

@@ -3,3 +3,6 @@
 *.lisp-temp
 *.*~
 
+*.dat
+*.pdf
+

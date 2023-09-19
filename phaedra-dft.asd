@@ -8,4 +8,6 @@
   :depends-on nil
   :serial t
   :components ((:file "package")
-	       (:file "phaedra-dft")))
+	       (:file "phaedra-dft")
+	       (:file "phaedra-dft-test")))
+
