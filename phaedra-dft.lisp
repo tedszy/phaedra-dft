@@ -30,10 +30,7 @@
 	      (loop for col from 0 below cols
 		    always
 		    (complex-near-p (aref mat1 row col)
-				    (aref mat2 row col))))
-	
-	
-	)
+				    (aref mat2 row col)))))
       (error "~a, ~a comparing matrices of different shapes"
 	     (array-dimensions mat1)
 	     (array-dimensions mat2))))
@@ -175,7 +172,8 @@
 	  (t
 	   (error "~s ~s bad polygon dimensions" rows cols)))))
 
-(defun make-polygon (n) (make-matrix n 1))
+(defun make-polygon (n)
+  (make-column-vector n))
 
 ;; The 1st Fourier polygon of order n.
 
