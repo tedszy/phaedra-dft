@@ -112,11 +112,12 @@
 	(make-diagonal-matrix
 	 (make-list 10 :initial-element 10))))
 
-(let ((fmatrix (fourier-matrix 7)))
+(let* ((n 7)
+       (fmatrix (fourier-matrix n)))
   (test fourier-matrix-columns-are-polygons
-	(loop for col from 0 below 7 
+	(loop for col from 0 below n 
 	      always (matrix-near-p
 		      (matrix-get-column fmatrix col)
-		      (fourier-polygon col 7)))
+		      (fourier-polygon col n)))
 	equal
 	t))
