@@ -54,9 +54,6 @@
 
 ;; --------------------------------------------------
 
-(defun complex-near-p (z1 z2)
-  (< (abs (- z1 z2)) 1.0d-10))
-
 (init-testing)
 
 (in-group 'roots-of-unity)
@@ -93,7 +90,33 @@
 	      always (complex-near-p
 		      (expt (root-of-unity k n) n)
 		      #C(1.0 0.0)))
-	eql
+	equal
 	t))
 
+(in-group 'polygons-and-matrices)
 
+(let ((poly (first-fourier-polygon 10)))
+  (test fourier-dot-product
+	(matrix-mul
+	 (matrix-transpose-conjugate poly)
+	 poly)
+	complex-near-p
+	10.0))
+
+(let ((fmatrix (fourier-matrix 10)))
+  (test fourier-matrix-inverse
+	(matrix-mul
+	 (matrix-transpose-conjugate fmatrix)
+	 fmatrix)
+	matrix-near-p
+	(make-diagonal-matrix
+	 (make-list 10 :initial-element 10))))
+
+(let ((fmatrix (fourier-matrix 7)))
+  (test fourier-matrix-columns-are-polygons
+	(loop for col from 0 below 7 
+	      always (matrix-near-p
+		      (matrix-get-column fmatrix col)
+		      (fourier-polygon col 7)))
+	equal
+	t))
