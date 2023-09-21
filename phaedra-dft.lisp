@@ -213,6 +213,7 @@
     (destructuring-bind (rows _)
 	(array-dimensions polygon)
       (declare (ignore _))
+      (format out "~a~%" 1) ;; Number of polygons in file.
       (format out "~a~%" rows)
       (loop for row from 0 below rows
 	    and vertex-label from 0
@@ -229,5 +230,37 @@
   (let ((poly (fourier-polygon k n)))
     (write-polygon poly filename)))    
 
+;; Write a list of polygons to file.
 
+(defun write-polygons
+    (polygon-list &optional (filename "polygon.dat"))
+  (with-open-file
+      (out filename :direction :output :if-exists :supersede)
+    (format out "~a~%" (length polygon-list))
+    (loop for polygon in polygon-list
+	  do (destructuring-bind (rows _)
+		 (array-dimensions polygon)
+	       (declare (ignore _))
+	       (format out "~a~%" rows)
+	       (loop for row from 0 below rows
+		     and vertex-label from 0
+		     do (let ((z (aref polygon row 0)))
+			  (format out
+				  "~a ~a ~a ~%"
+				  (realpart z)
+				  (imagpart z)
+				  vertex-label)))))))
+
+
+
+
+
+
+
+(defun do-it ()
+  (let ((foo (fourier-matrix 12)))
+    (write-polygons
+     (mapcar #'(lambda (u)
+		 (matrix-get-column foo u))
+	     '(0 1 2 3 4 5 6 7 8 9 10 11)))))
 
