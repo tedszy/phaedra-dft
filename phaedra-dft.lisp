@@ -58,11 +58,9 @@
    (list rows cols)
    :element-type 'matrix-element))
 
-(defun make-column-vector (rows)
-  (make-complex-matrix rows 1))
+(defun make-column-vector (rows) (make-matrix rows 1))
 
-(defun make-row-vector (cols)
-  (make-complex-matrix 1 cols))
+(defun make-row-vector (cols) (make-matrix 1 cols))
 
 (defun matrix-conjugate (matrix)
   (destructuring-bind (rows cols)
@@ -205,32 +203,9 @@
 	      (expt (aref ffp row 0) col))))
     result))
 
-;; We assume polygon is in standard column form.
-
-(defun write-polygon (polygon &optional (filename "polygon.dat"))
-  (with-open-file
-      (out filename :direction :output :if-exists :supersede)
-    (destructuring-bind (rows _)
-	(array-dimensions polygon)
-      (declare (ignore _))
-      (format out "~a~%" 1) ;; Number of polygons in file.
-      (format out "~a~%" rows)
-      (loop for row from 0 below rows
-	    and vertex-label from 0
-	    do (let ((z (aref polygon row 0)))
-		 (format out
-			 "~a ~a ~a ~%"
-			 (realpart z)
-			 (imagpart z)
-			 vertex-label))))))
-
-;; Something more specialized.
-
-(defun write-fourier-polygon (k n &optional (filename "polygon.dat"))
-  (let ((poly (fourier-polygon k n)))
-    (write-polygon poly filename)))    
 
 ;; Write a list of polygons to file.
+;; We assume polygon is in standard column form.
 
 (defun write-polygons
     (polygon-list &optional (filename "polygon.dat"))
@@ -251,7 +226,15 @@
 				  (imagpart z)
 				  vertex-label)))))))
 
+;; Something more specialized.
 
+(defun write-fourier-polygons
+    (k-n-list &optional (filename "polygon.dat"))
+  (write-polygons
+   (mapcar #'(lambda (k-n-pair)
+	       (apply #'fourier-polygon k-n-pair))
+	   k-n-list)
+   filename))    
 
 
 
